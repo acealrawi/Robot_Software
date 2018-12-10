@@ -1,0 +1,8 @@
+prefix=/home/ali/Robot_Software/aubo_ws/devel
+
+Name: moving_moveit_config
+Description: Description of moving_moveit_config
+Version: 0.3.0
+Cflags: 
+Libs: -L/home/ali/Robot_Software/aubo_ws/devel/lib 
+Requires: 

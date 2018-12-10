@@ -1,0 +1,8 @@
+prefix=/home/ali/Robot_Software/aubo_ws/devel
+
+Name: plan_and_run
+Description: Description of plan_and_run
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/ali/Robot_Software/aubo_ws/devel/lib 
+Requires: 

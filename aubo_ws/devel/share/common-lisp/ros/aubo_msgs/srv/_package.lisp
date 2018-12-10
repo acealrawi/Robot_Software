@@ -1,0 +1,15 @@
+(cl:defpackage aubo_msgs-srv
+  (:use )
+  (:export
+   "SETIO"
+   "<SETIO-REQUEST>"
+   "SETIO-REQUEST"
+   "<SETIO-RESPONSE>"
+   "SETIO-RESPONSE"
+   "SETPAYLOAD"
+   "<SETPAYLOAD-REQUEST>"
+   "SETPAYLOAD-REQUEST"
+   "<SETPAYLOAD-RESPONSE>"
+   "SETPAYLOAD-RESPONSE"
+  ))
+

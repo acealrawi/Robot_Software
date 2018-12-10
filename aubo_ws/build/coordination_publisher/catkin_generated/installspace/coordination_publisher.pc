@@ -1,0 +1,8 @@
+prefix=/home/ali/Robot_Software/aubo_ws/install
+
+Name: coordination_publisher
+Description: Description of coordination_publisher
+Version: 0.0.0
+Cflags: -I/home/ali/Robot_Software/aubo_ws/install/include
+Libs: -L/home/ali/Robot_Software/aubo_ws/install/lib 
+Requires: roscpp

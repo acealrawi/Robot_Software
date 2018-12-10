@@ -1,0 +1,8 @@
+prefix=/home/ali/Robot_Software/aubo_ws/devel
+
+Name: ur_gazebo
+Description: Description of ur_gazebo
+Version: 1.2.1
+Cflags: 
+Libs: -L/home/ali/Robot_Software/aubo_ws/devel/lib 
+Requires: 

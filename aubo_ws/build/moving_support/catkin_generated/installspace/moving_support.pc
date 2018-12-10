@@ -1,0 +1,8 @@
+prefix=/home/ali/Robot_Software/aubo_ws/install
+
+Name: moving_support
+Description: Description of moving_support
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/ali/Robot_Software/aubo_ws/install/lib 
+Requires: 

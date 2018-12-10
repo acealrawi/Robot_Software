@@ -1,0 +1,8 @@
+prefix=/home/ali/Robot_Software/aubo_ws/install
+
+Name: descartes_trajectory
+Description: Description of descartes_trajectory
+Version: 0.0.1
+Cflags: -I/home/ali/Robot_Software/aubo_ws/install/include -I/usr/include -I/usr/include/eigen3
+Libs: -L/home/ali/Robot_Software/aubo_ws/install/lib -ldescartes_trajectory
+Requires: descartes_core moveit_core roscpp

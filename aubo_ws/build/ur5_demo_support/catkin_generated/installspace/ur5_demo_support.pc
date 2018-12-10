@@ -1,0 +1,8 @@
+prefix=/home/ali/Robot_Software/aubo_ws/install
+
+Name: ur5_demo_support
+Description: Description of ur5_demo_support
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/ali/Robot_Software/aubo_ws/install/lib 
+Requires: 

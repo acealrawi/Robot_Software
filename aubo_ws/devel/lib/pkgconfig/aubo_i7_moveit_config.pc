@@ -1,0 +1,8 @@
+prefix=/home/ali/Robot_Software/aubo_ws/devel
+
+Name: aubo_i7_moveit_config
+Description: Description of aubo_i7_moveit_config
+Version: 1.3.3
+Cflags: 
+Libs: -L/home/ali/Robot_Software/aubo_ws/devel/lib 
+Requires: 

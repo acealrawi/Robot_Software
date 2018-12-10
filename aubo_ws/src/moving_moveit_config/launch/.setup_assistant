@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: moving_support
+    relative_path: urdf/workcell.xacro
+    xacro_args: "--inorder "
+  SRDF:
+    relative_path: config/myworkcell.srdf
+  CONFIG:
+    author_name: ROS Industrial
+    author_email: ros-i@rosindustrial.org
+    generated_timestamp: 1486965514

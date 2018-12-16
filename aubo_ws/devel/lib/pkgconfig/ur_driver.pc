@@ -1,8 +1,0 @@
-prefix=/home/ali/Robot_Software/aubo_ws/devel
-
-Name: ur_driver
-Description: Description of ur_driver
-Version: 1.2.1
-Cflags: -I/home/ali/Robot_Software/aubo_ws/devel/include
-Libs: -L/home/ali/Robot_Software/aubo_ws/devel/lib 
-Requires: dynamic_reconfigure

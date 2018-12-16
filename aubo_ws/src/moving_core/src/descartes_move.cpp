@@ -109,37 +109,37 @@ std::vector<descartes_core::TrajectoryPtPtr> makePath()
   const static double time_between_points = 0.5;
 
   EigenSTL::vector_Affine3d pattern_poses;
-  // for (int i = -num_steps / 2; i < num_steps / 2; ++i)
-  // {
-  //   // Create a pose and initialize it to identity
-  //   Eigen::Affine3d pose = Eigen::Affine3d::Identity();
-  //   // set the translation (we're moving along a line in Y)
-  //   pose.translation() = Eigen::Vector3d(0.3, i * step_size, 0.07);
-
-    
-  //   // set the orientation. By default, the tool will be pointing up into the air when we usually want it to
-  //   // be pointing down into the ground.
-  //   pose *= Eigen::AngleAxisd(M_PI * 0.5, Eigen::Vector3d::UnitX()); // this flips the tool around so that Z is down
-  //   pattern_poses.push_back(pose);
-  // }
-  double z = 0.07;
-  for (int i = 0; i < 20; i++)
+  for (int i = -num_steps / 2; i < num_steps / 2; ++i)
   {
     // Create a pose and initialize it to identity
     Eigen::Affine3d pose = Eigen::Affine3d::Identity();
     // set the translation (we're moving along a line in Y)
-    pose.translation() = Eigen::Vector3d(0.1, 0.05, z);
+    pose.translation() = Eigen::Vector3d(0.3, i * step_size, 0.07);
 
-
-    pose *= Eigen::AngleAxisd(M_PI *0.5, Eigen::Vector3d::UnitX()); // this flips the tool around so that Z is down
+    
+    // set the orientation. By default, the tool will be pointing up into the air when we usually want it to
+    // be pointing down into the ground.
+    pose *= Eigen::AngleAxisd(M_PI * 0.5, Eigen::Vector3d::UnitX()); // this flips the tool around so that Z is down
     pattern_poses.push_back(pose);
-    if(z == 0.1){
-      z = 0.001;
-    }
-    else{
-      z = 0.1;
-    }
   }
+  // double z = 0.07;
+  // for (int i = 0; i < 20; i++)
+  // {
+  //   // Create a pose and initialize it to identity
+  //   Eigen::Affine3d pose = Eigen::Affine3d::Identity();
+  //   // set the translation (we're moving along a line in Y)
+  //   pose.translation() = Eigen::Vector3d(0.1, 0.05, z);
+
+
+  //   pose *= Eigen::AngleAxisd(M_PI *0.5, Eigen::Vector3d::UnitX()); // this flips the tool around so that Z is down
+  //   pattern_poses.push_back(pose);
+  //   if(z == 0.1){
+  //     z = 0.001;
+  //   }
+  //   else{
+  //     z = 0.1;
+  //   }
+  // }
   
 
   Eigen::Affine3d pattern_origin = Eigen::Affine3d::Identity();

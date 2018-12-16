@@ -1,8 +1,0 @@
-prefix=/home/ali/Robot_Software/aubo_ws/install
-
-Name: descartes_core
-Description: Description of descartes_core
-Version: 0.0.1
-Cflags: -I/home/ali/Robot_Software/aubo_ws/install/include -I/usr/include -I/usr/include/eigen3
-Libs: -L/home/ali/Robot_Software/aubo_ws/install/lib -ldescartes_core
-Requires: moveit_core roscpp

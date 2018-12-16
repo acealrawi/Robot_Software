@@ -1,8 +1,0 @@
-prefix=/home/ali/Robot_Software/aubo_ws/install
-
-Name: aubo_demo
-Description: Description of aubo_demo
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/ali/Robot_Software/aubo_ws/install/lib 
-Requires: 

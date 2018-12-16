@@ -1,8 +1,0 @@
-prefix=/home/ali/Robot_Software/aubo_ws/install
-
-Name: ur5_demo_descartes
-Description: Description of ur5_demo_descartes
-Version: 0.0.0
-Cflags: -I/home/ali/Robot_Software/aubo_ws/install/include
-Libs: -L/home/ali/Robot_Software/aubo_ws/install/lib -lur5_demo_descartes
-Requires: moveit_core descartes_moveit pluginlib

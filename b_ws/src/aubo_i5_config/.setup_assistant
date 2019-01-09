@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: aubo_i5_support
+    relative_path: urdf/aubo_i5_robot.urdf.xacro
+    xacro_args: "--inorder "
+  SRDF:
+    relative_path: config/aubo_i5_robot.srdf
+  CONFIG:
+    author_name: a
+    author_email: a@a.com
+    generated_timestamp: 1546936555

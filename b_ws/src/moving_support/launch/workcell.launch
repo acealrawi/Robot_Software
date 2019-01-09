@@ -1,0 +1,7 @@
+<launch>
+  <node name="ar_publisher" pkg="ar_publisher" type="ar_publisher_node" output="screen"/>
+  <node name="vision_node" pkg="moving_core" type="vision_node" output="screen"/>
+  <node name="moving_node" pkg="moving_core" type="moving_node" output="screen">
+    <param name="base_frame" value="world"/>
+  </node>
+</launch>

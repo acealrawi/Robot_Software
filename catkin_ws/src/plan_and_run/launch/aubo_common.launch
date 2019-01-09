@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+  Usage:
+    aubo_common.launch robot_ip:=<value>
+-->
+<launch>
+  <!-- robot_ip: IP-address of the robot's socket-messaging server -->
+  <arg name="robot_ip" />
+
+  <!-- joint_trajectory_action: provides actionlib interface for high-level robot control -->
+  <node pkg="aubo_controller" type="aubo_joint_trajectory_action" name="aubo_joint_trajectory_action"/>
+  
+  <!-- driver -->
+  <!-- publish the robot state (tf transforms) -->
+  <node name="aubo_driver" pkg="aubo_driver" type="aubo_driver" >
+    <param name="/server_host" type="str" value="$(arg robot_ip)"/>
+  </node>
+
+  <!-- publish the robot state (tf transforms) -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+</launch>

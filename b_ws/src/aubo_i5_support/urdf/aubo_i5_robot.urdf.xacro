@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro"
+       name="aubo_i5_robot" >
+
+  <xacro:property name="PI" value="3.14159265359"/>
+  <xacro:property name="flange_radius" value="0.04"/>
+  <xacro:property name="flange_offset" value="0.08"/>
+  <xacro:property name="tool_tip_width" value="0.005"/>
+  <xacro:property name="tool_tip_length" value="0.08"/>
+  <xacro:property name="tool_extent_width" value="0.04"/>
+  <xacro:property name="tool_extent_length" value="0.02"/>
+  <xacro:property name="tool_body_width" value="0.04"/>
+  <xacro:property name="tool_body_length" value="0.06"/>
+  <xacro:property name="tool_length" value="${0.5*tool_body_length + tool_tip_length}"/>
+
+  <!-- common stuff -->
+  <xacro:include filename="$(find aubo_description)/urdf/common.gazebo.xacro" />
+
+  <!-- aubo_i5 -->
+  <xacro:include filename="$(find aubo_i5_support)/urdf/aubo_i5.urdf.xacro" />
+
+  <xacro:aubo_i5 />
+
+  <link name="world" />
+
+  <joint name="world_joint" type="fixed">
+    <parent link="world" />
+    <child link = "base_link" />
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+  </joint>
+
+  
+
+</robot>
+

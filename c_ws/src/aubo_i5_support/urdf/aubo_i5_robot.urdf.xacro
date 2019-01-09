@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro"
+       name="aubo_i5_robot" >
+
+  <!-- common stuff -->
+  <xacro:include filename="$(find aubo_i5_support)/urdf/common.gazebo.xacro" />
+  <xacro:include filename="$(find aubo_i5_support)/urdf/aubo.transmission.xacro" />
+  <xacro:include filename="$(find aubo_i5_support)/urdf/aubo.gazebo.xacro" />
+  <xacro:include filename="$(find aubo_i5_support)/urdf/materials.xacro" />
+
+  <!-- aubo_i5 -->
+  <xacro:include filename="$(find aubo_i5_support)/urdf/aubo_i5.urdf.xacro" />
+  <create/>
+  <xacro:aubo_i5/>
+  
+  <link name="world" />
+
+  <joint name="world_joint" type="fixed">
+    <parent link="world" />
+    <child link = "base_link" />
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+  </joint>
+
+</robot>
+

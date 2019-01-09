@@ -31,7 +31,7 @@ int main(int argc, char** argv)
 
   const std::string world_frame = "/world";
 
-  const std::string tcp_frame = "tool";
+  const std::string tcp_frame = "tool0";
 
   if (!model->initialize(robot_description, group_name, world_frame, tcp_frame))
   {

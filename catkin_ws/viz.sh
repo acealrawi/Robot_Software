@@ -1,0 +1,1 @@
+roslaunch moving_moveit_config myworkcell_planning_execution.launch

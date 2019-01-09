@@ -1,0 +1,143 @@
+<?xml version="1.0" ?>
+<robot name="myworkcell" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find ur_description)/urdf/ur5.urdf.xacro" />
+
+  <link name="world"/>
+
+  <link name="table">
+    <visual>
+      <geometry>
+        <box size="1.0 1.0 0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="1.0 1.0 0.05"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="camera_frame"/>
+
+  <xacro:ur5_robot prefix="" joint_limited="true"/>
+
+  <joint name="world_to_table" type="fixed">
+    <parent link="world"/>
+    <child link="table"/>
+    <origin xyz="0 0 0.5" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="world_to_camera" type="fixed">
+    <parent link="world"/>
+    <child link="camera_frame"/>
+    <origin xyz="-0.25 -0.5 1.25" rpy="0 3.14159 0"/>
+  </joint>
+
+  <joint name="table_to_robot" type="fixed">
+    <parent link="table"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+    <!--<link name="table">
+    <visual>
+      <geometry>
+        <box size="1.0 1.0 0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="1.0 1.0 0.05"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="camera_frame"/>
+
+
+  <link name="wall0">
+    <visual>
+      <origin xyz="-0.5 0 0"/>
+      <geometry>
+        <box size="0 1 2" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.5 0 0"/>
+      <geometry>
+        <box size="0 1 2" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="wall1">
+    <visual>
+      <origin xyz="0 0.5 0"/>
+      <geometry>
+        <box size="1 0 2" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0.5 0"/>
+      <geometry>
+        <box size="1 0 2" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="wall2">
+    <visual>
+      <origin xyz="0 -0.5 0"/>
+      <geometry>
+        <box size="1 0 2" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.5 0"/>
+      <geometry>
+        <box size="1 0 2" />
+      </geometry>
+    </collision>
+  </link>-->
+
+<!--joints -->
+<!--
+<joint name="world_to_table" type="fixed">
+  <parent link="world"/>
+  <child link="table"/>
+  <origin xyz="0 0 0.5" rpy="0 0 0"/>
+</joint>
+
+
+<joint name="table_to_wall0" type="fixed">
+  <parent link="table"/>
+  <child link="wall0"/>
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+</joint>
+
+<joint name="table_to_wall1" type="fixed">
+  <parent link="table"/>
+  <child link="wall1"/>
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+</joint>
+
+
+<joint name="table_to_wall2" type="fixed">
+  <parent link="table"/>
+  <child link="wall2"/>
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+</joint>
+
+<joint name="world_to_camera" type="fixed">
+  <parent link="world"/>
+  <child link="camera_frame"/>
+  <origin xyz="-0.25 -0.5 1.25" rpy="0 3.14159 0"/>
+</joint>
+
+<joint name="table_to_robot" type="fixed">
+    <parent link="table"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  -->
+</robot>

@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(aubo_move)
 
+
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
 
@@ -222,3 +223,11 @@ target_link_libraries(pose5
 # target_link_libraries(move_group_interface_tutorial
 #   ${catkin_LIBRARIES}
 # )
+
+add_executable(move2
+  src/move2.cpp
+)
+add_dependencies(move2 ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(move2
+  ${catkin_LIBRARIES}
+)

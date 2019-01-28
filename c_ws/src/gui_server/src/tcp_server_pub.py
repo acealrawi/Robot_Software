@@ -6,7 +6,7 @@ import socket
 import threading
 
 
-bind_ip = "192.168.10.101"
+bind_ip = "192.168.1.168"
 bind_port = 13000
 
 def client_data_publisher():
@@ -28,14 +28,14 @@ def client_data_publisher():
     print "Accepted connection from {}:{}".format(address[0], address[1])
 
     while not rospy.is_shutdown():    
-        handle_client_connection(client_sock)
-        pub.publish(hello_str)
+        handle_client_connection(client_sock, pub)
+
         rate.sleep()
 
 
 def handle_client_connection(client_socket, pub):
     request = client_socket.recv(1024).decode("utf-8")
-    pub.publisher(request)
+    pub.publish(request)
     
 if __name__ == '__main__':
     try:

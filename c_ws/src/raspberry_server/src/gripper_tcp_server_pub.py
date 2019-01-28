@@ -29,7 +29,6 @@ def gripper_data_publisher():
 
     while not rospy.is_shutdown():
         handle_client_connection(client_socket)
-        pub.publish(hello_str)
         rate.sleep()
 
 

@@ -162,6 +162,7 @@ class MoveGroupPythonInteface(object):
 
         while self.valveState == 1:
             print "wating for the valve to turn off"
+            time.sleep(20)
         
         wpose.position.z += scale * 0.3  
         waypoints.append(copy.deepcopy(wpose))
@@ -180,6 +181,67 @@ class MoveGroupPythonInteface(object):
         print "plan"
         plan, fraction = self.plan_cartesian_path(start, end, scale)
         self.execute_plan(plan)
+
+    def pick(self, start):
+        waypoints = []
+        start_x, start_y, start_z = self.coordination_decoder(start)
+        
+        wpose = geometry_msgs.msg.Pose()
+        q = tf.transformations.quaternion_from_euler(3.14,0,-1.57)
+        
+        wpose.position.x = -start_x
+        wpose.position.y = start_y
+        wpose.position.z = start_z
+
+        wpose.orientation.x = q[0]
+        wpose.orientation.y = q[1]
+        wpose.orientation.z = q[2]
+        wpose.orientation.w = q[3]
+        waypoints.append(copy.deepcopy(wpose))
+
+        (plan, fraction) = self.group.compute_cartesian_path(waypoints, 0.01, 0.0)
+
+        self.execute_plan(plan)
+
+        self.publish_valve_value(1)
+        while self.valveState == 0:
+            print "wating for the valve to turn on"
+            # self.valveState = 1
+            time.sleep(1)
+
+
+    def place(self, end):
+        waypoints = []
+        scale = 1
+        
+        end_x, end_y, end_z = self.coordination_decoder(end)
+        
+        wpose = self.group.get_current_pose().pose
+        waypoints.append(copy.deepcopy(wpose))
+        
+        wpose.position.z += scale * 0.3
+        waypoints.append(copy.deepcopy(wpose))
+
+        wpose.position.x -= scale * end_x
+        waypoints.append(copy.deepcopy(wpose))
+        
+        wpose.position.z -= scale * end_z
+        waypoints.append(copy.deepcopy(wpose))
+
+        (plan, fraction) = self.group.compute_cartesian_path(waypoints, 0.01, 0.0)
+
+        self.execute_plan(plan)
+        self.publish_valve_value(0)
+
+        while self.valveState == 1:
+            print "wating for the valve to turn off"
+            # self.valveState = 0
+            time.sleep(1)
+        
+
+                 
+        
+        
     
     def display_trajectory(self, plan):
         robot = self.robot
@@ -211,11 +273,8 @@ class MoveGroupPythonInteface(object):
         request = data.data
         print(request)
         if request.startswith("motion"):
-            start, end = self.motion_decoder(request)
-            thread = threading.Thread(target=self.plan_and_execute, args=(start, end))
+            thread = threading.Thread(target=self.execute_pick_and_place, args=(request,))
             thread.start()
-            # self.plan_and_execute(start, end)
-            # self.go_to_pose_goal(start,end)
         # if request.startswith("stop"):
             
         if request.startswith("flip"):
@@ -270,6 +329,24 @@ class MoveGroupPythonInteface(object):
     def publish_valve_value(self, value):
         self.gripper_server_publisher.publish("valveValue:{0}".format(value))
 
+    def execute_pick_and_place(self, motion_message):
+        self.home()
+        start, end = self.motion_decoder(motion_message)
+        self.pick(start)
+        self.place(end)
+        self.home()
+        
+    def test_run(self):
+        print "**********STARTING TEST RUN**********"
+        self.home()
+        motion_message = "motion 0.3,0,0.2 0.4,0,0.1"
+        start, end = self.motion_decoder(motion_message)
+        self.pick(start)
+        self.place(end)
+        self.home()
+        print "**********TEST RUN END**********"
+        
+
     
 
 
@@ -277,9 +354,7 @@ class MoveGroupPythonInteface(object):
 def main():
   try:
     mgpi = MoveGroupPythonInteface()
-    # mgpi.home()
-    # plan, fraction = mgpi.plan_cartesian_path(0.3,0.3)
-    # mgpi.execute_plan(plan)
+    # mgpi.test_run()
   except rospy.ROSInterruptException:
     return
   except KeyboardInterrupt:

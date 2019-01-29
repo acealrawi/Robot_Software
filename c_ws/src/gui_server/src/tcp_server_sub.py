@@ -14,7 +14,7 @@ def client_data_publisher():
 
     # rate = rospy.Rate(10) # 10hz
 
-    pub.publish("motion 0.3,0,0.2 0.4,0,0.1")
+    pub.publish("motion 0.3,0,0.2 0.4,0,0.3")
 
 
 def handle_client_connection(client_socket, pub):

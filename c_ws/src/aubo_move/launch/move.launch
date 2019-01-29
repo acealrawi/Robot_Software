@@ -1,3 +1,5 @@
 <launch>
   <node name="move" pkg="aubo_move" type="move.py" respawn="false" output="screen"></node>
+  <node name="tcp_server" pkg="gui_server" type="tcp_server_pub.py" respawn="false" output="screen"></node>
+  <node name="gripper_tcp_server" pkg="raspberry_server" type="gripper_tcp_server_pub.py" respawn="false" output="screen"></node>
 </launch>

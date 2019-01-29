@@ -6,7 +6,7 @@ import socket
 import threading
 
 
-bind_ip = "192.168.1.168"
+bind_ip = "192.168.10.101"
 bind_port = 13000
 
 def client_data_publisher():

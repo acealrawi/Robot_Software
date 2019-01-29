@@ -10,6 +10,7 @@ from std_msgs.msg import String
 from moveit_commander.conversions import pose_to_list
 import threading
 import tf
+import time
 
 
 
@@ -37,6 +38,7 @@ class MoveGroupPythonInteface(object):
         self.vacuumState = 0
         self.valveValue = 0
         self.flipValue = 0
+        self.rate = rospy.Rate(1000) # 10hz
 
         rospy.spin()
 
@@ -139,9 +141,10 @@ class MoveGroupPythonInteface(object):
         # waypoints.append(copy.deepcopy(wpose))
 
         self.publish_valve_value(1)
-        self.valveValue = 1
-        while self.valveState == self.valveValue:
-            continue
+        # self.valveValue = 1
+        while self.valveState == 0:
+            print "wating for the valve to turn on"
+            time.sleep(20)
         
         wpose.position.z += scale * 0.3
         waypoints.append(copy.deepcopy(wpose))
@@ -155,10 +158,10 @@ class MoveGroupPythonInteface(object):
 
         
         self.publish_valve_value(0)
-        self.valveValue = 0
+        # self.valveValue = 0
 
-        while self.valveState != self.valveValue:
-            continue
+        while self.valveState == 1:
+            print "wating for the valve to turn off"
         
         wpose.position.z += scale * 0.3  
         waypoints.append(copy.deepcopy(wpose))
@@ -209,7 +212,9 @@ class MoveGroupPythonInteface(object):
         print(request)
         if request.startswith("motion"):
             start, end = self.motion_decoder(request)
-            self.plan_and_execute(start, end)
+            thread = threading.Thread(target=self.plan_and_execute, args=(start, end))
+            thread.start()
+            # self.plan_and_execute(start, end)
             # self.go_to_pose_goal(start,end)
         # if request.startswith("stop"):
             
@@ -226,25 +231,25 @@ class MoveGroupPythonInteface(object):
 
     def handle_gripper_callback(self, data):
         request = data.data
-        if request.startwith("valveState"):
-            handle_valve_message()
-        if request.startwith("flipState"):
-            handle_flip_message()
-        if request.startwith("vacuumState"):
-            handle_vacuum_message()
+        if request.startswith("valveState"):
+            self.handle_valve_message(request)
+        if request.startswith("flipState"):
+            self.handle_flip_message(request)
+        if request.startswith("vacuumState"):
+            self.handle_vacuum_message(request)
 
     def gripper_message_decoder(self, message):
         state = int(message.split(':')[1].strip())
         return state
 
-    def handle_valve_message(self, state, socket):
-        self.valveState = gripper_message_decoder(message)
+    def handle_valve_message(self, state):
+        self.valveState = self.gripper_message_decoder(state)
 
-    def handle_flip_message(self, state, socket):
-        self.flipState = gripper_message_decoder(message)
+    def handle_flip_message(self, state):
+        self.flipState = self.gripper_message_decoder(state)
 
-    def handle_vacuum_message(self, state, socket):
-        self.vacuumState = gripper_message_decoder(message)
+    def handle_vacuum_message(self, state):
+        self.vacuumState = self.gripper_message_decoder(state)
 
     def print_information(self):
         # We can get the name of the reference frame for this robot:

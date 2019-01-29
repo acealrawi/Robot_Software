@@ -1,0 +1,2 @@
+source devel/setup.bash
+rosrun raspberry_server gripper_tcp_server_pub.py

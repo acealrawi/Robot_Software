@@ -2,24 +2,27 @@
 '''tcp_server ROS Node'''
 import rospy
 from std_msgs.msg import String
+import socket
+import threading
 
-def callback(data):
-    '''tcp_server Callback Function'''
-    rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
 
-def listener():
-    '''tcp_server Subscriber'''
-    # In ROS, nodes are uniquely named. If two nodes with the same
-    # node are launched, the previous one is kicked off. The
-    # anonymous=True flag means that rospy will choose a unique
-    # name for our 'listener' node so that multiple listeners can
-    # run simultaneously.
+def client_data_publisher():
+
+    pub = rospy.Publisher("guiToAubo", String, queue_size=10)
+
     rospy.init_node('tcp_server', anonymous=True)
 
-    rospy.Subscriber("chatter", String, callback)
+    # rate = rospy.Rate(10) # 10hz
 
-    # spin() simply keeps python from exiting until this node is stopped
-    rospy.spin()
+    pub.publish("motion 0.3,0,0.2 0.4,0,0.1")
 
+
+def handle_client_connection(client_socket, pub):
+    request = client_socket.recv(1024).decode("utf-8")
+    pub.publish(request)
+    
 if __name__ == '__main__':
-    listener()
+    try:
+        client_data_publisher()
+    except rospy.ROSInterruptException:
+        pass
